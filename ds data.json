@@ -1,0 +1,103 @@
+[
+    {
+      "serialNumber": "21",
+      "name": "Ankit Jain",
+      "rollNumber": "27300122142",
+      "registrationNumber": "22273030344",
+      "phoneNumber": "9823232343",
+      "presentPercentage": "91%",
+      "alternativePhoneNumber": "9835633911",
+      "email": "example21@gmail.com"
+    },
+    {
+      "serialNumber": "22",
+      "name": "Neha Agrawal",
+      "rollNumber": "27300122143",
+      "registrationNumber": "22273030345",
+      "phoneNumber": "9823232344",
+      "presentPercentage": "84%",
+      "alternativePhoneNumber": "9835633912",
+      "email": "example22@gmail.com"
+    },
+    {
+      "serialNumber": "23",
+      "name": "Rohit Singh",
+      "rollNumber": "27300122144",
+      "registrationNumber": "22273030346",
+      "phoneNumber": "9823232345",
+      "presentPercentage": "87%",
+      "alternativePhoneNumber": "9835633913",
+      "email": "example23@gmail.com"
+    },
+    {
+      "serialNumber": "24",
+      "name": "Mitali Sharma",
+      "rollNumber": "27300122145",
+      "registrationNumber": "22273030347",
+      "phoneNumber": "9823232346",
+      "presentPercentage": "92%",
+      "alternativePhoneNumber": "9835633914",
+      "email": "example24@gmail.com"
+    },
+    {
+      "serialNumber": "25",
+      "name": "Rajesh Kumar",
+      "rollNumber": "27300122146",
+      "registrationNumber": "22273030348",
+      "phoneNumber": "9823232347",
+      "presentPercentage": "85%",
+      "alternativePhoneNumber": "9835633915",
+      "email": "example25@gmail.com"
+    },
+    {
+      "serialNumber": "26",
+      "name": "Ritika Mehta",
+      "rollNumber": "27300122147",
+      "registrationNumber": "22273030349",
+      "phoneNumber": "9823232348",
+      "presentPercentage": "9%",
+      "alternativePhoneNumber": "9835633916",
+      "email": "example26@gmail.com"
+    },
+    {
+      "serialNumber": "27",
+      "name": "Vikram Reddy",
+      "rollNumber": "27300122148",
+      "registrationNumber": "22273030350",
+      "phoneNumber": "9823232349",
+      "presentPercentage": "88%",
+      "alternativePhoneNumber": "9835633917",
+      "email": "example27@gmail.com"
+    },
+    {
+      "serialNumber": "28",
+      "name": "Pooja Verma",
+      "rollNumber": "27300122149",
+      "registrationNumber": "22273030351",
+      "phoneNumber": "9823232350",
+      "presentPercentage": "94%",
+      "alternativePhoneNumber": "9835633918",
+      "email": "example28@gmail.com"
+    },
+    {
+      "serialNumber": "29",
+      "name": "Arjun Gupta",
+      "rollNumber": "27300122150",
+      "registrationNumber": "22273030352",
+      "phoneNumber": "9823232351",
+      "presentPercentage": "89%",
+      "alternativePhoneNumber": "9835633919",
+      "email": "example29@gmail.com"
+    },
+    {
+      "serialNumber": "30",
+      "name": "Sonia Patel",
+      "rollNumber": "27300122151",
+      "registrationNumber": "22273030353",
+      "phoneNumber": "9823232352",
+      "presentPercentage": "2%",
+      "alternativePhoneNumber": "9835633920",
+      "email": "example30@gmail.com"
+    }
+  ]
+  

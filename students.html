@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Management</title>
+    <link rel="stylesheet" href="src/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+    />
+    <link rel="icon" type="image/png" href="fevicon.png" />
+  </head>
+  <style>
+    .content {
+      width: 79vw;
+      height: 87vh;
+      background-color: #fef7ff;
+      margin: 5px;
+      border-radius: 15px;
+    }
+    .attendance-title {
+      margin: 30px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+    .attendance-title p {
+      font-size: 30px;
+      font-weight: bold;
+      border-bottom: 5px solid #e8def8;
+    }
+    .attendance-title select {
+      padding: 10px;
+      font-size: 20px;
+      border: #e8def8 2px solid;
+      border-radius: 15px;
+      background-color: white;
+    }
+    .details {
+      height: 60%;
+      margin: 10px;
+      border-radius: 15px;
+    }
+    .colomn {
+      display: flex;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-between;
+    }
+    #title {
+      display: flex;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+    .details-rows {
+    display: flex
+;
+    flex-direction: column;
+    max-height: 55vh;
+    overflow-y: auto;
+    /* gap: 5px; */
+}
+
+    .colomn p {
+      margin: 0;
+      width: auto;
+      font-size: 14px;
+    }
+    .colomn li {
+      list-style: none;
+    }
+    #mar {
+      width: 160px;
+      text-align: center;
+    }
+    .attendance-red {
+      color: red;
+      font-weight: bold;
+    }
+
+    .attendance-green {
+      color: green;
+      font-weight: bold;
+    }
+    
+    #attendanceFilter{
+      background-color: transparent;
+      width: 90px;
+      font-size: 17px;
+      border: none;
+    }
+
+  </style>
+  <body>
+    <nav>
+      <div class="img"><img src="src/assets/logo.png" alt="logo" /></div>
+      <!-- <div class="profile">
+        <a href="notification.html">
+          <i class="fa-regular fa-bell fa-shake"></i></a>
+        <div class="person-details">
+          <div>
+            <img
+              id="nav-profile-pic"
+              src="profile logo.jpg"
+              alt="Profile Picture"
+            />
+          </div>
+          <div id="faculty">
+            <p id="nav-profile-name">Faculty Name</p>
+            <p id="nav-phone">27300122122</p>
+          </div>
+        </div>
+      </div> -->
+    </nav>
+
+    <div class="main-content">
+      <div class="main">
+        <div class="panel">
+          <div class="panel-item">
+            <p id="panel-head">MENU</p>
+            <div class="list">
+              <ul>
+                <li>
+                  <a style="font-weight: 200" href="professor-home.html">ATTENDANCE</a>
+                  <a style="font-weight: 600" href="#">STUDENTS</a>
+                  <a href="https://project-oyjq2x9dk-shubhankar-sakets-projects.vercel.app/">ASSIGNMENTS MAKER</a>
+                  <a href="timetable.html">TIME-TABLE</a>
+                  <a href="https://project-4ur41nnkc-raeessgs-projects.vercel.app/">MY ASSISTANT</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- <div class="bottom-profile">
+            <p id="panel-head">ACCOUNT</p>
+            <div class="bottom-profile-item">
+              <div class="bottom-profile-option">
+                <i class="fa-regular fa-user"></i>
+                <a style="text-decoration: none;" href="profile.html">PROFILE</a>
+              </div>
+              <div class="bottom-profile-option">
+                <i class="fa-solid fa-headset"></i>
+                <a
+                  style="text-decoration: none"
+                  href="https://wa.me/919835633891?text=Hello,%20I%20found%20your%20contact%20information%20from%20AttendEase"
+                  >Contact us on WhatsApp</a
+                >
+              </div>
+              <div class="bottom-profile-option">
+                <i
+                  class="fa-solid fa-right-from-bracket fa-beat"
+                  style="color: #ff0000"
+                ></i>
+                <a style="text-decoration: none" href="login.html">Log Out</a>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="content">
+          <div class="attendance-title">
+            <p>STUDENT RECORDS</p>
+            <form>
+              <select id="section" name="section" required>
+                <option value="" disabled selected>CHOOSE DEPARTMENT</option>
+                <option value="CSE">CSE</option>
+                <option value="AIML">AI ML</option>
+                <option value="DS">DS</option>
+              </select>
+            </form>
+            <div class="search">
+              <div id="filterContainer" >
+                <select id="attendanceFilter" name="attendanceFilter">
+                  <option value="" selected>Filter</option>
+                  <option value="below40">Below 40%</option>
+                  <option value="all">All</option>
+                </select>
+              </div>
+              <i class="fa-solid fa-bars" id="filterIcon"></i>
+              <input type="text" id="searchBox" placeholder="Search" />
+              <i class="fa-solid fa-magnifying-glass fa-beat-fade"></i>
+              
+            </div>
+          </div>
+          <div class="details">
+            <div id="title" style="border-bottom: 3px solid #e8def8">
+              <p>Serial</p>
+              <p id="mar">Name</p>
+              <p style="margin-left: 60px">Roll No.</p>
+              <p style="margin-left: 50px">Reg. No.</p>
+              <p style="margin-left: 55px">Contact No.</p>
+              <p>Attendance %</p>
+
+              <p>Mail</p>
+            </div>
+            <div class="details-rows" id="details-rows">
+              <!-- more column div will add here dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let allStudentData = [];
+      let filteredData = [];
+
+      function loadDepartmentData(section) {
+        let fileName = "";
+
+        switch (section) {
+          case "CSE":
+            fileName = "cse data.json";
+            break;
+          case "AIML":
+            fileName = "aiml data.json";
+            break;
+          case "DS":
+            fileName = "ds data.json";
+            break;
+          default:
+            fileName = "";
+        }
+
+        if (fileName) {
+          fetch(fileName)
+            .then((response) => response.json())
+            .then((data) => {
+              allStudentData = data;
+              filteredData = data; // Initialize filtered data with all data
+              displayData(filteredData);
+            })
+            .catch((error) => console.error("Error fetching data:", error));
+        }
+      }
+
+      function getAttendanceClass(percentage) {
+        const numericPercentage = parseFloat(percentage);
+        if (numericPercentage < 50) {
+          return "attendance-red";
+        } else if (numericPercentage > 80) {
+          return "attendance-green";
+        } else {
+          return "";
+        }
+      }
+
+      function filterByAttendance(data, filter) {
+        if (filter === "below40") {
+          return data.filter(
+            (student) => parseFloat(student.presentPercentage) < 40
+          );
+        }
+        return data;
+      }
+
+      function searchStudents(query) {
+        const lowerCaseQuery = query.toLowerCase();
+        const searchResults = filteredData.filter(
+          (student) =>
+            student.name.toLowerCase().includes(lowerCaseQuery) ||
+            student.rollNumber.includes(query) ||
+            student.registrationNumber.includes(query)
+        );
+
+        displayData(searchResults);
+      }
+
+      function applyFilters() {
+        const attendanceFilter =
+          document.getElementById("attendanceFilter").value;
+        filteredData = filterByAttendance(allStudentData, attendanceFilter);
+        searchStudents(document.getElementById("searchBox").value); // Reapply search to filtered data
+        displayData(filteredData);
+      }
+
+      function displayData(data) {
+        const container = document.getElementById("details-rows");
+        container.innerHTML = ""; // Clear previous data
+
+        data.forEach((student) => {
+          const li = document.createElement("ul");
+          li.classList.add("colomn");
+          li.innerHTML = `
+      <li><p>${student.serialNumber}</p></li>
+      <li><p id="mar">${student.name}</p></li>
+      <li><p>${student.rollNumber}</p></li>
+      <li><p>${student.registrationNumber}</p></li>
+      <li><p>${student.phoneNumber}</p></li>
+      <li><p class="${getAttendanceClass(student.presentPercentage)}">${
+            student.presentPercentage
+          }</p></li>
+      <li><a href="mailto:${student.email}">
+        <i class="fa-solid fa-envelope fa-bounce" style="color: #000000"></i>
+      </a></li>
+    `;
+          container.appendChild(li);
+        });
+      }
+
+      document
+        .getElementById("section")
+        .addEventListener("change", function () {
+          const section = this.value;
+          loadDepartmentData(section);
+        });
+
+      document
+        .getElementById("searchBox")
+        .addEventListener("input", function () {
+          searchStudents(this.value);
+        });
+
+      document
+        .getElementById("attendanceFilter")
+        .addEventListener("change", function () {
+          applyFilters();
+        });
+
+      // document
+      //   .getElementById("filterIcon")
+      //   .addEventListener("click", function () {
+      //     const filterContainer = document.getElementById("filterContainer");
+      //     if (
+      //       filterContainer.style.display === "none" ||
+      //       filterContainer.style.display === ""
+      //     ) {
+      //       filterContainer.style.display = "block";
+      //     } else {
+      //       filterContainer.style.display = "none";
+      //     }
+      //   });
+
+
+      window.onload = function () {
+  const userName = localStorage.getItem("userName");
+  const userPhone = localStorage.getItem("userPhone");
+  const profilePhoto = localStorage.getItem("profilePhoto");
+
+  if (userName)
+    document.getElementById("nav-profile-name").textContent = userName;
+  if (userPhone) document.getElementById("nav-phone").textContent = userPhone; // Make sure you have an id of 'nav-phone' for the phone number
+  if (profilePhoto)
+    document.getElementById("nav-profile-pic").src = profilePhoto;
+};
+    </script>
+  </body>
+</html>

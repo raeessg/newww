@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AttendEase</title>
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@1.9.54/build/spline-viewer.js"
+    ></script>
+
+    <style>
+      body {
+        overflow: hidden;
+        font-family: "Kumbh Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+        color: #333;
+        background-color: #f9f9f9;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero {
+        position: absolute;
+        left: 5rem;
+        top: 14rem;
+        padding: 4rem;
+        border-radius: 2rem;
+        background: #f1f1f1a1;
+      }
+
+      span img {
+        width: 7rem;
+        border-radius: 50%;
+      }
+
+      span {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: #2004ff1c;
+        padding: 15px;
+        border-radius: 2rem;
+      }
+      span {
+        transition: transform 0.3s ease; /* Smooth transition */
+      }
+
+      span:hover {
+        transform: scale(1.1); /* Slightly enlarges on hover */
+      }
+
+      .sections {
+        display: flex;
+        gap: 3rem;
+      }
+
+      /* Loader styles */
+      .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999; /* Ensures loader is on top */
+      }
+
+      .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Hide all content when loader is active */
+      .content-hidden {
+        visibility: hidden;
+      }
+
+      .text {
+        font-family: "Yanone Kaffeesatz";
+        font-size: 70px;
+        display: flex;
+        position: absolute;
+        top: 1rem;
+        left: 30rem;
+        transform: translateX(-50%);
+        user-select: none;
+
+        .wrapper {
+          padding-left: 20px;
+          padding-right: 20px;
+          padding-top: 20px;
+          .letter {
+            transition: ease-out 1s;
+            transform: translateY(40%);
+          }
+          .shadow {
+            transform: scale(1, -1);
+            color: #c6cde1;
+            transition: ease-in 5s, ease-out 5s;
+          }
+          &:hover {
+            .letter {
+              transform: translateY(-200%);
+            }
+            .shadow {
+              opacity: 0;
+              transform: translateY(200%);
+            }
+          }
+        }
+      }
+    </style>
+    <style>
+      .loaderr {
+        
+        height: 5px;
+        width: 250px;
+        --c: no-repeat linear-gradient(#6100ee 0 0);
+        background: var(--c), var(--c), #d7b8fc;
+        background-size: 60% 100%;
+        animation: l16 3s infinite;
+      }
+      @keyframes l16 {
+        0% {
+          background-position: -150% 0, -150% 0;
+        }
+        66% {
+          background-position: 250% 0, -150% 0;
+        }
+        100% {
+          background-position: 250% 0, 250% 0;
+        }
+      }
+
+      /* Message for smaller screens */
+      .small-screen-message {
+        display: none;
+      }
+
+      /* Media query for small screens */
+      @media (max-width: 768px) {
+        .text,
+        .hero {
+          filter: blur(5px); /* Apply blur to the body */
+        }
+        .text {
+          align-items: center;
+        }
+        spline-viewer {
+          display: none;
+        }
+        body {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .small-screen-message {
+          display: flex;
+        }
+        .small-screen-message {
+          display: none;
+          position: absolute;
+          top: 0;
+          left: 0px;
+          width: 100%;
+          padding: 0rem;
+          height: 100%;
+          /* background: rgb(0 0 0 / 41%); */
+          color: #000000;
+          font-size: 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          z-index: 10000;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="small-screen-message">
+      Please use a device like a PC to view this website.
+    </div>
+
+    <!-- Loader overlay -->
+    <div class="loader-overlay" id="loader">
+      <div class="loaderr"></div>
+    </div>
+
+    <!-- Spline Viewer -->
+    <spline-viewer
+      url="https://prod.spline.design/oGKUYjWLWwcqc1On/scene.splinecode"
+      onload="hideLoader()"
+    ></spline-viewer>
+
+    <!-- Main content -->
+
+    <!-- #CodePenChallenge: Lightndess -->
+
+    <div class="text">
+      <div class="wrapper">
+        <div id="L" class="letter">A</div>
+        <div class="shadow">A</div>
+      </div>
+      <div class="wrapper">
+        <div id="I" class="letter">T</div>
+        <div class="shadow">T</div>
+      </div>
+      <div class="wrapper">
+        <div id="I" class="letter">T</div>
+        <div class="shadow">T</div>
+      </div>
+      <div class="wrapper">
+        <div id="I" class="letter">E</div>
+        <div class="shadow">E</div>
+      </div>
+      <div class="wrapper">
+        <div id="G" class="letter">N</div>
+        <div class="shadow">N</div>
+      </div>
+      <div class="wrapper">
+        <div id="H" class="letter">D</div>
+        <div class="shadow">D</div>
+      </div>
+      <div class="wrapper">
+        <div id="T" class="letter">E</div>
+        <div class="shadow">E</div>
+      </div>
+      <div class="wrapper">
+        <div id="N" class="letter">A</div>
+        <div class="shadow">A</div>
+      </div>
+
+      <div class="wrapper">
+        <div id="S" class="letter">S</div>
+        <div class="shadow">S</div>
+      </div>
+      <div class="wrapper">
+        <div id="E" class="letter">E</div>
+        <div class="shadow">E</div>
+      </div>
+    </div>
+    <div class="hero" id="main-content">
+      <p style="font-size: 2rem; text-align: center; margin: 0">
+        Attendance Made Easy
+      </p>
+      <p style="font-size: 1rem; text-align: center">Choose your user type</p>
+      <div class="sections">
+        <span>
+          <a href="student-auth.html"><img src="school-boy.png" alt="" /></a>
+          <p style="margin: 0">Student</p>
+        </span>
+        <span>
+          <a href="professor-auth.html"><img src="teacher.png" alt="" /></a>
+          <p style="margin: 0">Professor</p>
+        </span>
+      </div>
+    </div>
+
+    <script>
+      // Show the loader initially and hide the content
+      document.getElementById("loader").style.display = "flex";
+      document.getElementById("main-content").classList.add("content-hidden");
+
+      // Function to hide the loader after 4-5 seconds
+      function hideLoader() {
+        setTimeout(function () {
+          document.getElementById("loader").style.display = "none";
+          document
+            .getElementById("main-content")
+            .classList.remove("content-hidden");
+        }, 1000); // 4 seconds delay
+      }
+
+      // For simulating delay before the model is ready (can be adjusted as needed)
+      setTimeout(function () {
+        hideLoader(); // Automatically hide after 4 seconds
+      }, 1000);
+    </script>
+  </body>
+</html>

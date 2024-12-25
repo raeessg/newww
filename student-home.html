@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Management</title>
+    <link rel="stylesheet" href="src/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+    />
+    <link rel="icon" type="image/png" href="fevicon.png" />
+    <style>
+      /* Basic CSS for the date display */
+      .date-display {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      /* Container styling */
+      /* Container styling */
+.ai-space {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f7f6; /* Light background */
+  margin: 0;
+}
+
+/* Input container styling */
+.input-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.input-container input {
+  width: 80%;
+  padding: 12px 40px 12px 20px; /* Space for the icon on the right */
+  font-size: 18px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-container input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Icon styling */
+.input-container i {
+  position: absolute;
+  top: 50%;
+  right: 15px; /* Position inside the right padding of input */
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 18px;
+  pointer-events: none; /* Prevent interaction with the icon */
+}
+
+/* Focus effects */
+.input-container input:focus {
+  outline: none;
+  border-color: #00bfff; /* Light blue border */
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.input-container input:focus + i {
+  color: #00bfff; /* Change icon color on focus */
+}
+
+
+    </style>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      .wrap{
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+        margin: 3rem;
+      }
+      
+      header {
+        background-color: #4caf50;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+      }
+      main {
+        padding: 20px;
+        width: 100%;
+        background: white;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .contentt {
+        max-width: 1200px;
+        width: 100%;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      canvas {
+        margin-top: 20px;
+        width: 25% !important;
+        height: auto !important;
+      }
+      .contentt p{
+        margin: 6px;
+      }
+      .nameplate {
+    border-radius: 2rem;
+    background: #f1f1f1a1;
+    width: 12rem;
+    padding: 1rem;
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <nav>
+      <div class="img"><img src="src/assets/logo.png" alt="logo" /></div>
+      <div class="ai-space">
+        <div class="input-container">
+          
+          <!-- <input type="text" placeholder="Ask me..."><i class="fa-solid fa-magnifying-glass"></i> -->
+        </div>
+      </div>
+      
+      <div class="profile">
+        <!-- <div class="nav-date">
+          <input type="date" id="date-picker" name="nav-date" />
+        </div> -->
+        <a href="notification.html">
+          <i class="fa-regular fa-bell fa-shake"></i
+        ></a>
+        <div class="person-details">
+          <div id="app"></div>
+          <div id="faculty">
+            <p id="nav-profile-name"></p>
+            <p id="nav-phone"></p>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="main-content">
+      <div class="main">
+        <div class="panel">
+          <div class="panel-item">
+            <p id="panel-head">MENU</p>
+            <div class="list">
+              <ul>
+                <li>
+                  <a href="">MY ATTENDANCE</a>
+                  <a href="https://project-4ur41nnkc-raeessgs-projects.vercel.app/">
+                    MY ASSISTANT</a>
+                  <a href="https://project-oyjq2x9dk-shubhankar-sakets-projects.vercel.app/">ASSIGMENTS MAKER</a>
+                  <a href="timetable.html">TIME-TABLE</a>
+                  
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- <div class="bottom-profile">
+            <p id="panel-head">ACCOUNT</p>
+            <div class="bottom-profile-item">
+              <div class="bottom-profile-option">
+                <i class="fa-regular fa-user"></i>
+                <a style="text-decoration: none" href="profile.html">PROFILE</a>
+              </div>
+              <div class="bottom-profile-option">
+                <i class="fa-solid fa-headset"></i>
+                <a
+                  style="text-decoration: none"
+                  href="https://wa.me/919835633891?text=Hello,%20I%20found%20your%20contact%20information%20from%20AttendEase"
+                  >Contact us on WhatsApp</a
+                >
+              </div>
+              <div class="bottom-profile-option">
+                <i
+                  class="fa-solid fa-right-from-bracket"
+                  style="color: #ff0000"
+                ></i>
+                <a style="text-decoration: none" href="login.html">Log Out</a>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="content">
+          <main>
+            <div class="contentt">
+              <div class="nameplate">
+              <p><strong>Name:</strong> Md Raees</p>
+              <p><strong>Roll Number:</strong>22273030</p>
+              <p><strong>Semester:</strong> 5th</p>
+              <p><strong>Section:</strong> A</p>
+            </div>
+              
+              <div class="wrap">
+                <canvas id="attendanceChart" width="800" height="400"></canvas>
+                <canvas id="monthlyChart" width="800" height="400"></canvas>
+                <canvas id="smallChart" width="400" height="200"></canvas>
+              </div><table id="attendanceTable">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </main>
+          <!-- <div class="attendance-title">
+            <p>ATTENDANCE</p>
+
+            <form>
+              <select id="section" name="section" required>
+                <option value="" disabled selected>SELECT DEPARTMENT</option>
+                <option value="CSE">CSE</option>
+                <option value="AIML">AI ML</option>
+                <option value="DS">DS</option>
+              </select>
+            </form>
+
+            <form>
+              <select id="subject" name="subject" required>
+                <option value="" disabled selected>SELECT SUBJECT</option>
+              </select>
+            </form>
+          </div> -->
+
+          <!-- <div class="attendance-sheet">
+            <div id="mySelect" style="display: none">
+              <div id="x">
+                <div>
+                  <div class="attendance-sheet-title">
+                    <p>STUDENT NAME</p>
+                    <p>ROLL NO.</p>
+                    <p>PRESENT</p>
+                    <p>ABSENT</p>
+                  </div>
+                  <div id="container" class="container"></div>
+                </div>
+
+                <div class="total-present">
+                  <div class="present">
+                    <div class="present-no"><p id="present-count">0</p></div>
+                    <div class="present-p"><p>Present</p></div>
+                    <div class="present-data">
+                      <i class="fa-solid fa-chart-line"></i>
+                      <p id="present-increase">+3% increase than yesterday</p>
+                    </div>
+                  </div>
+                  <div class="present pre-col">
+                    <div class="absent-no"><p id="absent-count">0</p></div>
+                    <div class="absent-p"><p>Absent</p></div>
+                    <div class="absent-data">
+                      <i class="fa-solid fa-chart-line"></i>
+                      <p id="absent-decrease">-4% decrease than yesterday</p>
+                    </div>
+                  </div>
+                  <div class="attendance-submit-btn">
+                    <button type="button" id="submit-attendance-btn">
+                      SUBMIT ATTENDANCE
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <!-- <div id="content">
+        <div class="upper-content">
+          <div class="present-diagram">
+            <div class="container">
+              <div class="ui-widgets">
+                <div class="ui-values">0%</div>
+              </div>
+            </div>
+            <div>
+              <h3>TOTAL PRESENT</h3>
+            </div>
+          </div>
+          <div class="department">
+            <div>
+              <div class="container">
+                <div class="ui-widgets-2">
+                  <div class="ui-values-2">
+                    <img src="Ellipse 6.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="department-details">
+              <p>DEPARTMENT</p>
+              <div id="cse">
+                <p>CSE</p>
+                <p>120</p>
+              </div>
+              <div id="aiml">
+                <p>AI ML</p>
+                <p>120</p>
+              </div>
+              <div id="ds">
+                <p>DS</p>
+                <p>120</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart">
+            <canvas id="attendanceChart" width="400" height="200"></canvas>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <script type="module">
+      import { Clerk } from "@clerk/clerk-js";
+
+(async () => {
+  try {
+    // Get your Clerk publishable key from your environment variables
+    const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+    // Initialize Clerk
+    const clerk = new Clerk(clerkPubKey);
+
+    // Wait for Clerk to load
+    await clerk.load();
+
+    // Check if the user is authenticated
+    if (clerk.user) {
+      const firstName = clerk.user.firstName;
+
+      // Set the first name and email in the navigation
+      document.getElementById("nav-profile-name").innerHTML = `${firstName}`;
+
+      // Create the user button container
+      const appElement = document.getElementById("app");
+      if (appElement) {
+        appElement.innerHTML = `<div id="user-button"></div>`;
+        
+        // Get the user button element
+        const userButtonDiv = document.getElementById("user-button");
+
+        // Mount the Clerk User Button
+        clerk.mountUserButton(userButtonDiv);
+      } else {
+        console.error("Element with id 'app' not found.");
+      }
+    } else {
+      console.log("User not authenticated.");
+    }
+  } catch (error) {
+    console.error("Error initializing Clerk:", error);
+  }
+})();
+
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const studentInfo = {
+      name: "John Doe",
+      rollNumber: "12345",
+      class: "10th Grade",
+      section: "A",
+    };
+
+    const attendanceData = {
+      "2024-12-01": "Present",
+      "2024-12-02": "Absent",
+      "2024-12-03": "Present",
+      "2024-12-04": "Present",
+      "2024-12-05": "Absent",
+      "2024-12-06": "Present",
+      "2024-12-07": "Present",
+      "2024-12-08": "Absent",
+      "2024-12-09": "Present",
+      "2024-12-10": "Absent",
+    };
+
+    const tableBody = document.getElementById("attendanceTable").querySelector("tbody");
+    const chartCanvas = document.getElementById("attendanceChart");
+    const monthlyChartCanvas = document.getElementById("monthlyChart");
+    const smallChartCanvas = document.getElementById("smallChart");
+
+    let presentCount = 0;
+    let absentCount = 0;
+
+    Object.keys(attendanceData).forEach((date) => {
+      const row = document.createElement("tr");
+      const dateCell = document.createElement("td");
+      const statusCell = document.createElement("td");
+
+      dateCell.textContent = date;
+      statusCell.textContent = attendanceData[date];
+
+      row.appendChild(dateCell);
+      row.appendChild(statusCell);
+      tableBody.appendChild(row);
+
+      if (attendanceData[date] === "Present") {
+        presentCount++;
+      } else {
+        absentCount++;
+      }
+    });
+
+    new Chart(chartCanvas, {
+      type: "pie",
+      data: {
+        labels: ["Present", "Absent"],
+        datasets: [
+          {
+            label: "Attendance",
+            data: [presentCount, absentCount],
+            backgroundColor: ["#6C9A8B", "#E9C46A"],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+      },
+    });
+
+    const monthlyAttendance = {
+      January: { Present: 20, Absent: 5 },
+      February: { Present: 18, Absent: 2 },
+      March: { Present: 22, Absent: 3 },
+      April: { Present: 25, Absent: 0 },
+      May: { Present: 19, Absent: 6 },
+      December: { Present: presentCount, Absent: absentCount },
+    };
+
+    const months = Object.keys(monthlyAttendance);
+    const monthlyPresent = months.map((month) => monthlyAttendance[month].Present);
+    const monthlyAbsent = months.map((month) => monthlyAttendance[month].Absent);
+
+    new Chart(monthlyChartCanvas, {
+      type: "bar",
+      data: {
+        labels: months,
+        datasets: [
+          {
+            label: "Present",
+            data: monthlyPresent,
+            backgroundColor: "#6C9A8B",
+          },
+          {
+            label: "Absent",
+            data: monthlyAbsent,
+            backgroundColor: "#E9C46A",
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Month",
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Count",
+            },
+          },
+        },
+      },
+    });
+
+    // Small graph example
+    new Chart(smallChartCanvas, {
+      type: "line",
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+        datasets: [
+          {
+            label: "Monthly Data",
+            data: [5, 10, 15, 20, 25],
+            borderColor: "#6C9A8B",
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Month",
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Value",
+            },
+          },
+        },
+      },
+    });
+  </script>
+    <script src="script.js"></script>
+    <script src="chart.js"></script>
+    <script>
+      
+    </script>
+  </body>
+</html>

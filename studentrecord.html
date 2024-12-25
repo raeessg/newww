@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Tracker</title>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      .wrap{
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+        margin: 3rem;
+      }
+      
+      header {
+        background-color: #4caf50;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+      }
+      main {
+        padding: 20px;
+        width: 100%;
+        background: white;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .content {
+        max-width: 1200px;
+        width: 100%;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      canvas {
+        margin-top: 20px;
+        width: 25% !important;
+        height: auto !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Attendance Tracker</h1>
+    </header>
+    <main>
+      <div class="contentt">
+        <h2>Student Information</h2>
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Roll Number:</strong> 12345</p>
+        <p><strong>Class:</strong> 10th Grade</p>
+        <p><strong>Section:</strong> A</p>
+
+        <h2>Attendance Records</h2>
+        <table id="attendanceTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="wrap">
+          <canvas id="attendanceChart" width="800" height="400"></canvas>
+          <canvas id="monthlyChart" width="800" height="400"></canvas>
+          <canvas id="smallChart" width="400" height="200"></canvas>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const studentInfo = {
+        name: "John Doe",
+        rollNumber: "12345",
+        class: "10th Grade",
+        section: "A",
+      };
+
+      const attendanceData = {
+        "2024-12-01": "Present",
+        "2024-12-02": "Absent",
+        "2024-12-03": "Present",
+        "2024-12-04": "Present",
+        "2024-12-05": "Absent",
+        "2024-12-06": "Present",
+        "2024-12-07": "Present",
+        "2024-12-08": "Absent",
+        "2024-12-09": "Present",
+        "2024-12-10": "Absent",
+      };
+
+      const tableBody = document
+        .getElementById("attendanceTable")
+        .querySelector("tbody");
+      const chartCanvas = document.getElementById("attendanceChart");
+      const monthlyChartCanvas = document.getElementById("monthlyChart");
+      const smallChartCanvas = document.getElementById("smallChart");
+
+      let presentCount = 0;
+      let absentCount = 0;
+
+      Object.keys(attendanceData).forEach((date) => {
+        const row = document.createElement("tr");
+        const dateCell = document.createElement("td");
+        const statusCell = document.createElement("td");
+
+        dateCell.textContent = date;
+        statusCell.textContent = attendanceData[date];
+
+        row.appendChild(dateCell);
+        row.appendChild(statusCell);
+        tableBody.appendChild(row);
+
+        if (attendanceData[date] === "Present") {
+          presentCount++;
+        } else {
+          absentCount++;
+        }
+      });
+
+      new Chart(chartCanvas, {
+        type: "pie",
+        data: {
+          labels: ["Present", "Absent"],
+          datasets: [
+            {
+              label: "Attendance",
+              data: [presentCount, absentCount],
+              backgroundColor: ["#4caf50", "#f44336"],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+        },
+      });
+
+      const monthlyAttendance = {
+        January: { Present: 20, Absent: 5 },
+        February: { Present: 18, Absent: 2 },
+        March: { Present: 22, Absent: 3 },
+        April: { Present: 25, Absent: 0 },
+        May: { Present: 19, Absent: 6 },
+        December: { Present: presentCount, Absent: absentCount },
+      };
+
+      const months = Object.keys(monthlyAttendance);
+      const monthlyPresent = months.map(
+        (month) => monthlyAttendance[month].Present
+      );
+      const monthlyAbsent = months.map(
+        (month) => monthlyAttendance[month].Absent
+      );
+
+      new Chart(monthlyChartCanvas, {
+        type: "bar",
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: "Present",
+              data: monthlyPresent,
+              backgroundColor: "#4caf50",
+            },
+            {
+              label: "Absent",
+              data: monthlyAbsent,
+              backgroundColor: "#f44336",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Month",
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Count",
+              },
+            },
+          },
+        },
+      });
+
+      // Small graph example
+      new Chart(smallChartCanvas, {
+        type: "line",
+        data: {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+          datasets: [
+            {
+              label: "Monthly Data",
+              data: [5, 10, 15, 20, 25],
+              borderColor: "#4caf50",
+              fill: false,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Month",
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Value",
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Management</title>
+    <link rel="stylesheet" href="src/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+    />
+    <link rel="icon" type="image/png" href="fevicon.png" />
+    <link
+      href="https://unpkg.com/tabulator-tables@5.2.5/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .content {
+        width: 79vw;
+        height: 87vh;
+        background-color: #fef7ff;
+        margin: 5px;
+        border-radius: 15px;
+      }
+
+      /* Custom Styles */
+      .tabulator {
+        font-family: "Arial", sans-serif;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        width: 95%;
+        margin-left: 2rem;
+      }
+      .tabulator-header {
+        background-color: #f4f4f4;
+        color: #333;
+      }
+      .tabulator .tabulator-table {
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+      .tabulator .tabulator-row {
+        border-bottom: 1px solid #ddd;
+      }
+      .tabulator .tabulator-cell {
+        padding: 24px;
+        text-align: center;
+      }
+      .tabulator .tabulator-header .tabulator-col {
+        text-align: center;
+      }
+      .tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+        box-sizing: border-box;
+        position: relative;
+        padding: 4px;
+        background-color: #e8def8;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="img"><img src="src/assets/logo.png" alt="logo" /></div>
+      <div class="profile">
+        <!-- <div class="person-details">
+          <div>
+            <img
+              id="nav-profile-pic"
+              src="profile logo.jpg"
+              alt="Profile Picture"
+            />
+          </div>
+          <div id="faculty">
+            <p id="nav-profile-name">Faculty Name</p>
+            <p id="nav-phone">27300122122</p>
+          </div>
+        </div> -->
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="main">
+        <div class="panel">
+          <div class="panel-item">
+            <p id="panel-head">MENU</p>
+            <div class="list">
+              <ul>
+                <li>
+                  <a style="font-weight: 200" href="professor-home.html">ATTENDANCE</a>
+                  <a style="font-weight: 200" href="students.html">STUDENTS</a>
+                  <a href="https://project-oyjq2x9dk-shubhankar-sakets-projects.vercel.app/">ASSIGNMENTS MAKER</a>
+                  <a href="timetable.html" style="font-weight: 600">TIME TABLE</a>
+                  <a href="https://project-4ur41nnkc-raeessgs-projects.vercel.app/">MY ASSISTANT</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- <div class="bottom-profile">
+            <p id="panel-head">ACCOUNT</p>
+            <div class="bottom-profile-item">
+              <div class="bottom-profile-option">
+                <i class="fa-regular fa-user"></i>
+                <a style="text-decoration: none" href="profile.html">PROFILE</a>
+              </div>
+              <div class="bottom-profile-option">
+                <i class="fa-solid fa-headset"></i>
+                <a
+                  style="text-decoration: none"
+                  href="https://wa.me/919835633891?text=Hello,%20I%20found%20your%20contact%20information%20from%20AttendEase"
+                  >Contact us on WhatsApp</a
+                >
+              </div>
+              <div class="bottom-profile-option">
+                <i
+                  class="fa-solid fa-right-from-bracket fa-beat"
+                  style="color: #ff0000"
+                ></i>
+                <a style="text-decoration: none" href="login.html">Log Out</a>
+              </div>
+            </div>
+          </div> -->
+        </div>
+
+        <div class="content" style="flex-direction: column">
+          <div class="attendance-title">
+            <p>TIME-TABLE</p>
+            <form>
+              <select id="section" name="section" required>
+                <option value="" disabled selected>CHOOSE DEPARTMENT</option>
+                <option value="CSE">CSE</option>
+                <option value="AIML">AI ML</option>
+                <option value="DS">DS</option>
+              </select>
+            </form>
+          </div>
+          <div id="example-table"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/tabulator-tables@5.2.5/dist/js/tabulator.min.js"></script>
+    <script>
+      // Dummy data for different departments
+      const data = {
+        CSE: [
+          {
+            time: "10:00 - 11:00",
+            Monday: "Data Structures",
+            Tuesday: "Algorithms",
+            Wednesday: "Database Systems",
+            Thursday: "Computer Networks",
+            Friday: "Operating Systems",
+          },
+          {
+            time: "11:00 - 12:00",
+            Monday: "Algorithms",
+            Tuesday: "Data Structures",
+            Wednesday: "Operating Systems",
+            Thursday: "Database Systems",
+            Friday: "Computer Networks",
+          },
+          {
+            time: "12:00 - 1:00",
+            Monday: "Database Systems",
+            Tuesday: "Operating Systems",
+            Wednesday: "Computer Networks",
+            Thursday: "Algorithms",
+            Friday: "Data Structures",
+          },
+          {
+            time: "1:00 - 2:00",
+            Monday: "Computer Networks",
+            Tuesday: "Database Systems",
+            Wednesday: "Algorithms",
+            Thursday: "Data Structures",
+            Friday: "Operating Systems",
+          },
+          {
+            time: "2:00 - 3:00",
+            Monday: "Operating Systems",
+            Tuesday: "Computer Networks",
+            Wednesday: "Data Structures",
+            Thursday: "Algorithms",
+            Friday: "Database Systems",
+          },
+          {
+            time: "3:00 - 4:00",
+            Monday: "Data Structures",
+            Tuesday: "Operating Systems",
+            Wednesday: "Computer Networks",
+            Thursday: "Database Systems",
+            Friday: "Algorithms",
+          },
+          {
+            time: "4:00 - 5:00",
+            Monday: "Database Systems",
+            Tuesday: "Algorithms",
+            Wednesday: "Operating Systems",
+            Thursday: "Computer Networks",
+            Friday: "Data Structures",
+          },
+        ],
+        AIML: [
+          {
+            time: "10:00 - 11:00",
+            Monday: "Machine Learning",
+            Tuesday: "Deep Learning",
+            Wednesday: "Natural Language Processing",
+            Thursday: "Computer Vision",
+            Friday: "Data Science",
+          },
+          {
+            time: "11:00 - 12:00",
+            Monday: "Deep Learning",
+            Tuesday: "Machine Learning",
+            Wednesday: "Data Science",
+            Thursday: "Natural Language Processing",
+            Friday: "Computer Vision",
+          },
+          {
+            time: "12:00 - 1:00",
+            Monday: "Natural Language Processing",
+            Tuesday: "Data Science",
+            Wednesday: "Computer Vision",
+            Thursday: "Machine Learning",
+            Friday: "Deep Learning",
+          },
+          {
+            time: "1:00 - 2:00",
+            Monday: "Computer Vision",
+            Tuesday: "Natural Language Processing",
+            Wednesday: "Machine Learning",
+            Thursday: "Deep Learning",
+            Friday: "Data Science",
+          },
+          {
+            time: "2:00 - 3:00",
+            Monday: "Data Science",
+            Tuesday: "Computer Vision",
+            Wednesday: "Deep Learning",
+            Thursday: "Natural Language Processing",
+            Friday: "Machine Learning",
+          },
+          {
+            time: "3:00 - 4:00",
+            Monday: "Machine Learning",
+            Tuesday: "Data Science",
+            Wednesday: "Deep Learning",
+            Thursday: "Computer Vision",
+            Friday: "Natural Language Processing",
+          },
+          {
+            time: "4:00 - 5:00",
+            Monday: "Deep Learning",
+            Tuesday: "Machine Learning",
+            Wednesday: "Natural Language Processing",
+            Thursday: "Data Science",
+            Friday: "Computer Vision",
+          },
+        ],
+        DS: [
+          {
+            time: "10:00 - 11:00",
+            Monday: "Introduction to Data Science",
+            Tuesday: "Data Wrangling",
+            Wednesday: "Data Visualization",
+            Thursday: "Big Data Analytics",
+            Friday: "Statistical Analysis",
+          },
+          {
+            time: "11:00 - 12:00",
+            Monday: "Data Wrangling",
+            Tuesday: "Introduction to Data Science",
+            Wednesday: "Big Data Analytics",
+            Thursday: "Data Visualization",
+            Friday: "Statistical Analysis",
+          },
+          {
+            time: "12:00 - 1:00",
+            Monday: "Data Visualization",
+            Tuesday: "Big Data Analytics",
+            Wednesday: "Statistical Analysis",
+            Thursday: "Introduction to Data Science",
+            Friday: "Data Wrangling",
+          },
+          {
+            time: "1:00 - 2:00",
+            Monday: "Big Data Analytics",
+            Tuesday: "Data Visualization",
+            Wednesday: "Introduction to Data Science",
+            Thursday: "Statistical Analysis",
+            Friday: "Data Wrangling",
+          },
+          {
+            time: "2:00 - 3:00",
+            Monday: "Statistical Analysis",
+            Tuesday: "Introduction to Data Science",
+            Wednesday: "Data Wrangling",
+            Thursday: "Data Visualization",
+            Friday: "Big Data Analytics",
+          },
+          {
+            time: "3:00 - 4:00",
+            Monday: "Introduction to Data Science",
+            Tuesday: "Statistical Analysis",
+            Wednesday: "Data Visualization",
+            Thursday: "Big Data Analytics",
+            Friday: "Data Wrangling",
+          },
+          {
+            time: "4:00 - 5:00",
+            Monday: "Data Wrangling",
+            Tuesday: "Big Data Analytics",
+            Wednesday: "Statistical Analysis",
+            Thursday: "Data Visualization",
+            Friday: "Introduction to Data Science",
+          },
+        ],
+      };
+
+      var table = new Tabulator("#example-table", {
+        layout: "fitColumns",
+        responsiveLayout: "hide",
+        columns: [
+          { title: "Time", field: "time", sortable: false },
+          { title: "Monday", field: "Monday", sortable: false },
+          { title: "Tuesday", field: "Tuesday", sortable: false },
+          { title: "Wednesday", field: "Wednesday", sortable: false },
+          { title: "Thursday", field: "Thursday", sortable: false },
+          { title: "Friday", field: "Friday", sortable: false },
+        ],
+      });
+
+      document
+        .getElementById("section")
+        .addEventListener("change", function () {
+          var department = this.value;
+          table.setData(data[department] || []);
+        });
+    </script>
+  </body>
+</html>

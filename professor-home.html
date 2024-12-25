@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Management</title>
+    <link rel="stylesheet" href="src/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+    />
+    <link rel="icon" type="image/png" href="fevicon.png" />
+    <style>
+      /* Basic CSS for the date display */
+      .date-display {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .attendance-title button {
+        padding: 10px;
+        font-size: 20px;
+        border: #e8def8 2px solid;
+        border-radius: 15px;
+        background-color: white;
+        cursor: pointer;
+      }
+      .attendance-title button:hover {
+        background-color: rgb(255, 208, 208);
+      }
+
+      .attendance-title button i {
+        margin: 6px;
+      }
+      .loader {
+        border: 4px solid #f3f3f3; /* Light grey background */
+        border-top: 4px solid #ff2424; /* Red color for the top part */
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin-left: 10px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <script>
+      function runFaceDetection() {
+        fetch("http://localhost:5000/run_face_detection")
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data.message); // Show the response message
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred while running the face detection.");
+          });
+          document.getElementById("loader").style.display = "inline-block";
+          document.getElementById("startFaceDetectionButton").disabled = true;
+          setTimeout(() => {
+          // Hide the loader and re-enable the button
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("startFaceDetectionButton").disabled = false;
+
+          // Your actual face detection code here...
+          console.log("Face detection completed.");
+        }, 30000);
+      }
+    </script>
+    <!-- <script>
+      function startFaceDetection() {
+        // Show the loader and disable the button
+        document.getElementById("loader").style.display = "inline-block";
+        document.getElementById("startFaceDetectionButton").disabled = true;
+
+        // Simulate face detection process (replace with your actual detection logic)
+        setTimeout(() => {
+          // Hide the loader and re-enable the button
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("startFaceDetectionButton").disabled = false;
+
+          // Your actual face detection code here...
+          console.log("Face detection completed.");
+        }, 10000); // Simulate a 10-second delay (replace with your actual face detection time)
+      }
+    </script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+  </head>
+  <body>
+    <nav>
+      <div class="img"><img src="src/assets/logo.png" alt="logo" /></div>
+      <div class="profile">
+        <div class="nav-date">
+          <input type="date" id="date-picker" name="nav-date" />
+        </div>
+        <a href="notification.html">
+          <i class="fa-regular fa-bell fa-shake"></i
+        ></a>
+        <div class="person-details">
+          <div id="app"></div>
+          <div id="faculty">
+            <p id="nav-profile-name"></p>
+            <p id="nav-phone"></p>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="main-content">
+      <div class="main">
+        <div class="panel">
+          <div class="panel-item">
+            <p id="panel-head">MENU</p>
+            <div class="list">
+              <ul>
+                <li>
+                  <a href="professor-home.html">ATTENDANCE</a>
+                  <a href="students.html">STUDENTS</a>
+                  <a
+                    href="https://project-oyjq2x9dk-shubhankar-sakets-projects.vercel.app/"
+                    >ASSIGNMENTS MAKER</a
+                  >
+                  <a href="timetable.html">TIME-TABLE</a>
+                  <a
+                    href="https://project-4ur41nnkc-raeessgs-projects.vercel.app/"
+                    >MY ASSISTANT</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- <div class="bottom-profile">
+            <p id="panel-head">ACCOUNT</p>
+            <div class="bottom-profile-item">
+              <div class="bottom-profile-option">
+                <i class="fa-regular fa-user"></i>
+                <a style="text-decoration: none" href="profile.html">PROFILE</a>
+              </div>
+              <div class="bottom-profile-option">
+                <i class="fa-solid fa-headset"></i>
+                <a
+                  style="text-decoration: none"
+                  href="https://wa.me/919835633891?text=Hello,%20I%20found%20your%20contact%20information%20from%20AttendEase"
+                  >Contact us on WhatsApp</a
+                >
+              </div>
+              <div class="bottom-profile-option">
+                <i
+                  class="fa-solid fa-right-from-bracket"
+                  style="color: #ff0000"
+                ></i>
+                <a style="text-decoration: none" href="login.html">Log Out</a>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="content">
+          <div class="attendance-title">
+            <p>ATTENDANCE</p>
+
+            <button
+              id="startFaceDetectionButton"
+              onclick="runFaceDetection()"
+            >
+              <i class="fa-solid fa-camera fa-fade" style="color: #ff2424"></i>
+              Start Face Detection
+            </button>
+            <!-- Loader that will appear when the task is running -->
+            <div id="loader" class="loader" style="display: none"></div>
+            <form>
+              <select id="section" name="section" required>
+                <option value="" disabled selected>Select Department</option>
+                <option value="CSE">CSE</option>
+                <option value="AIML">AI ML</option>
+                <option value="DS">DS</option>
+              </select>
+            </form>
+
+            <form>
+              <select id="subject" name="subject" required>
+                <option value="" disabled selected>Select Subject</option>
+              </select>
+            </form>
+          </div>
+
+          <div class="attendance-sheet">
+            <div id="mySelect" style="display: none">
+              <div id="x">
+                <div>
+                  <div class="attendance-sheet-title">
+                    <p>STUDENT NAME</p>
+                    <p>ROLL NO.</p>
+                    <p>PRESENT</p>
+                    <p>ABSENT</p>
+                  </div>
+                  <div id="container" class="container"></div>
+                </div>
+
+                <div class="total-present">
+                  <div class="present">
+                    <div class="present-no"><p id="present-count">0</p></div>
+                    <div class="present-p"><p>Present</p></div>
+                    <div class="present-data">
+                      <i class="fa-solid fa-chart-line"></i>
+                      <p id="present-increase">+3% increase than yesterday</p>
+                    </div>
+                  </div>
+                  <div class="present pre-col">
+                    <div class="absent-no"><p id="absent-count">0</p></div>
+                    <div class="absent-p"><p>Absent</p></div>
+                    <div class="absent-data">
+                      <i class="fa-solid fa-chart-line"></i>
+                      <p id="absent-decrease">-4% decrease than yesterday</p>
+                    </div>
+                  </div>
+                  <div class="attendance-submit-btn">
+                    <button type="button" id="submit-attendance-btn">
+                      SUBMIT ATTENDANCE
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+        <div class="upper-content">
+          <div class="present-diagram">
+            <div class="container">
+              <div class="ui-widgets">
+                <div class="ui-values">0%</div>
+              </div>
+            </div>
+            <div>
+              <h3>TOTAL PRESENT</h3>
+            </div>
+          </div>
+          <div class="department">
+            <div>
+              <div class="container">
+                <div class="ui-widgets-2">
+                  <div class="ui-values-2">
+                    <img src="Ellipse 6.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="department-details">
+              <p>DEPARTMENT</p>
+              <div id="cse">
+                <p>CSE</p>
+                <p>120</p>
+              </div>
+              <div id="aiml">
+                <p>AI ML</p>
+                <p>120</p>
+              </div>
+              <div id="ds">
+                <p>DS</p>
+                <p>120</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="chart">
+            <canvas id="attendanceChart" width="400" height="200"></canvas>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <script type="module">
+      import { Clerk } from "@clerk/clerk-js";
+
+      (async () => {
+        try {
+          // Get your Clerk publishable key from your environment variables
+          const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+          // Initialize Clerk
+          const clerk = new Clerk(clerkPubKey);
+
+          // Wait for Clerk to load
+          await clerk.load();
+
+          // Check if the user is authenticated
+          if (clerk.user) {
+            const firstName = clerk.user.firstName;
+
+            // Set the first name and email in the navigation
+            document.getElementById(
+              "nav-profile-name"
+            ).innerHTML = `${firstName}`;
+
+            // Create the user button container
+            const appElement = document.getElementById("app");
+            if (appElement) {
+              appElement.innerHTML = `<div id="user-button"></div>`;
+
+              // Get the user button element
+              const userButtonDiv = document.getElementById("user-button");
+
+              // Mount the Clerk User Button
+              clerk.mountUserButton(userButtonDiv);
+            } else {
+              console.error("Element with id 'app' not found.");
+            }
+          } else {
+            console.log("User not authenticated.");
+          }
+        } catch (error) {
+          console.error("Error initializing Clerk:", error);
+        }
+      })();
+    </script>
+
+    <script src="script.js"></script>
+    <!-- <script src="chart.js"></script> -->
+    <script></script>
+  </body>
+</html>

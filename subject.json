@@ -1,0 +1,30 @@
+{
+  "departments": {
+    "CSE": [
+      "SOFTWARE ENGINEERING cse",
+      "COMPILER DESIGN cse",
+      "OPERATING SYSTEM cse",
+      "OOPs cse",
+      "INDUSTRIAL MANAGEMENT cse",
+      "AI cse",
+      "CONSTITUTION OF INDIA cse"
+    ],
+    "AIML": [
+      "CLOUD COMPUTING aiml",
+      "MACHINE LEARNING aiml",
+      "OOPs aiml",
+      "INDUSTRIAL MANAGEMENT aiml",
+      "OPERATING SYSTEM aiml"
+    ],
+    "DS": [
+      "SOFTWARE ENGINEERING ds",
+      "COMPILER DESIGN ds",
+      "OPERATING SYSTEM ds",
+      "OOPs ds",
+      "INDUSTRIAL MANAGEMENT ds",
+      "AI ds",
+      "CONSTITUTION OF INDIA ds",
+      "DATA SCIENCE ds"
+    ]
+  }
+}
